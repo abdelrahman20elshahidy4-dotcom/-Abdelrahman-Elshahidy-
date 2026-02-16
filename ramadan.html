@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>رمضان كريم</title>
+
+<style>
+body{
+  margin:0;
+  padding:0;
+  font-family: Tahoma, sans-serif;
+  background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+  color:#fff;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* باسورد */
+#lock{
+  position:fixed;
+  inset:0;
+  background:#0f2027;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+.lock-box{
+  background:rgba(255,255,255,0.1);
+  padding:30px;
+  border-radius:15px;
+}
+
+input{
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  width:200px;
+  text-align:center;
+}
+
+button{
+  margin-top:10px;
+  padding:10px 20px;
+  border:none;
+  border-radius:8px;
+  background:#ffd700;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* الكارت */
+.card{
+  margin:80px auto;
+  width:85%;
+  max-width:400px;
+  background:rgba(255,255,255,0.08);
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 0 20px rgba(255,215,0,0.3);
+}
+
+h1{
+  color:#ffd700;
+}
+
+p{
+  line-height:1.9;
+  font-size:18px;
+}
+
+.name{
+  margin-top:20px;
+  color:#ffd700;
+  font-weight:bold;
+}
+
+/* القلوب */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:20px;
+  animation:float 6s linear infinite;
+  opacity:0.7;
+}
+
+@keyframes float{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-110vh);}
+}
+
+/* العداد */
+#countdown{
+  margin:20px 0;
+  font-size:18px;
+  color:#ffd700;
+}
+</style>
+</head>
+
+<body>
+
+<!-- باسورد -->
+<div id="lock">
+  <div class="lock-box">
+    <h3>🔒Enter password </h3>
+    <input type="password" id="pass" placeholder="اكتب الباسورد">
+    <br>
+    <button onclick="check()">دخول</button>
+  </div>
+</div>
+
+<!-- المحتوى -->
+<div class="card">
+  <h1>🌙 رمضان كريم</h1>
+
+  <p>
+    رمضان بييجي كل سنة  
+    بس في ناس وجودهم في حياتنا  
+    هو اللي بيخلي للشهر طعم مختلف.  
+    أنتِ من الناس دي…  
+    قلبك طيب، وكلامك مريح،  
+    ووجودك دايمًا مصدر خير وراحة ❤️
+  </p>
+
+  <p>
+    ربنا يجعل أيامك كلها طمأنينة  
+    ويكتبلك الخير في كل خطوة،  
+    ويخلي قلبك دايمًا مليان نور ورضا.  
+    رمضانك جميل زي روحك 🌙
+  </p>
+
+  <div id="countdown"></div>
+
+  <div class="name">
+    Abdelrahman Elshahidy
+  </div>
+</div>
+
+<script>
+/* باسورد */
+function check(){
+  if(document.getElementById("pass").value === "Booda204"){
+    document.getElementById("lock").style.display="none";
+  }else{
+    alert("الباسورد غلط");
+  }
+}
+
+/* القلوب */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(15+Math.random()*20)+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},500);
+
+/* العد التنازلي */
+const target = new Date("2026-02-18T00:00:00").getTime();
+
+setInterval(()=>{
+  let now = new Date().getTime();
+  let diff = target - now;
+
+  if(diff < 0){
+    document.getElementById("countdown").innerHTML="🌙 رمضان كريم 🌙";
+    return;
+  }
+
+  let d = Math.floor(diff / (1000*60*60*24));
+  let h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  let m = Math.floor((diff%(1000*60*60))/(1000*60));
+  let s = Math.floor((diff%(1000*60))/1000);
+
+  document.getElementById("countdown").innerHTML =
+    `⏳ باقي ${d} يوم ${h} ساعة ${m} دقيقة ${s} ثانية`;
+},1000);
+</script>
+
+</body>
+</html>
